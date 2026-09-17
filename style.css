@@ -56,8 +56,11 @@ body.home {
   list-style: none;
 }
 
+/* Each breakpoint is set where that column count actually fits, including the
+   3rem of body padding: 3 cols need 3x5.5rem + 2x1.9rem + 3rem = ~373px, and
+   6 cols need 6x6rem + 5x2.25rem + 3rem = ~804px. */
 @media (min-width: 26rem) { .home-screen { grid-template-columns: repeat(3, 5.5rem); } }
-@media (min-width: 40rem) {
+@media (min-width: 52rem) {
   .home-screen {
     grid-template-columns: repeat(6, 6rem);
     gap: 2.5rem 2.25rem;
@@ -74,6 +77,9 @@ body.home {
 .home-app img {
   display: block;
   width: 100%;
+  /* height:auto is load-bearing — the width/height attributes on the <img> are
+     presentational hints, and a used height of 512px would beat aspect-ratio. */
+  height: auto;
   aspect-ratio: 1;
   border-radius: var(--icon-radius);
   background: #17171a;
