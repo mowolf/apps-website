@@ -9,13 +9,17 @@ in this repository is exactly what is served.
 ## Layout
 
 ```
-index.html              the list of apps
+index.html              the Home Screen grid of app icons
 style.css               the only stylesheet
+icons/<app>.png         the app's real icon, 512px, copied from its source repo
 CNAME                   the custom domain for GitHub Pages
 .nojekyll               serve the files as-is, no Jekyll processing
 <app>/index.html        one landing page per app
 <app>/privacy/index.html  the privacy policy linked from App Store Connect
 ```
+
+The index page is deliberately nothing but the icon grid — no title, no
+copy — rendered the way iOS draws a Home Screen.
 
 | App | Path | Privacy URL | Source repo |
 | --- | --- | --- | --- |
@@ -27,13 +31,17 @@ CNAME                   the custom domain for GitHub Pages
 | JasperSleep | `/jaspersleep/` | `/jaspersleep/privacy/` | `~/repos/babyphone` |
 
 All six are marked **in development**. Drop the `<span class="badge">` line from
-an app's page (and from its card in `index.html`) when it ships.
+an app's page when it ships.
 
 ## Adding an app
 
 1. `mkdir -p <slug>/privacy`
 2. Copy the two HTML files from the closest existing app and rewrite the content.
-3. Add a card to `index.html`.
+3. Copy the app's 1024px icon out of its `AppIcon.appiconset` and shrink it:
+   `sips -Z 512 icon-1024.png --out icons/<slug>.png`
+4. Add a tile to `index.html`.
+
+Contact address on every page is `apps@moritzwolf.com`.
 
 ## Working on it
 

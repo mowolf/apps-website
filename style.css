@@ -1,120 +1,200 @@
 /* apps.moritzwolf.com — one stylesheet for every page */
 
 :root {
-  --bg: #fbfaf8;
-  --panel: #ffffff;
-  --border: #e6e2db;
-  --ink: #1b1a18;
-  --muted: #6b6760;
-  --accent: #2f6d5a;
-  --badge-bg: #f0ece3;
-  --badge-ink: #6b6760;
-  --radius: 14px;
-}
+  --bg: #000000;
+  --panel: #0e0e10;
+  --border: #232326;
+  --ink: #f2f2f4;
+  --muted: #8e8e95;
+  --accent: #5ac8a8;
+  --badge-bg: #1a1a1d;
+  --badge-ink: #9b9ba3;
+  --radius: 16px;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14150f;
-    --panel: #1c1e17;
-    --border: #2e3128;
-    --ink: #eceadf;
-    --muted: #9b978c;
-    --accent: #7fc3aa;
-    --badge-bg: #252820;
-    --badge-ink: #9b978c;
-  }
+  /* Apple's continuous-corner app icon: 22.37% of the icon's side */
+  --icon-radius: 22.37%;
+
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+
+html { background: var(--bg); }
 
 body {
   margin: 0;
   padding: 0 1.25rem 5rem;
   background: var(--bg);
   color: var(--ink);
-  font: 400 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+  font: 400 17px/1.65 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .wrap { max-width: 44rem; margin: 0 auto; }
-.wrap--wide { max-width: 56rem; }
 
-/* ---------- header ---------- */
+/* ---------- home screen ---------- */
 
-header { padding: 4rem 0 2.5rem; }
-
-h1 {
-  font-size: clamp(2rem, 6vw, 2.8rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.6rem;
+/* The index page is nothing but the grid, centred in the viewport. */
+body.home {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
 }
 
-.tagline { color: var(--muted); margin: 0; font-size: 1.05rem; }
+.home-screen {
+  display: grid;
+  grid-template-columns: repeat(2, 5.5rem);
+  justify-content: center;
+  gap: 2.25rem 1.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 26rem) { .home-screen { grid-template-columns: repeat(3, 5.5rem); } }
+@media (min-width: 40rem) {
+  .home-screen {
+    grid-template-columns: repeat(6, 6rem);
+    gap: 2.5rem 2.25rem;
+  }
+}
+
+.home-app {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-app img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--icon-radius);
+  /* Safari draws the real squircle; everyone else gets the rounded square. */
+  -webkit-corner-smoothing: 60%;
+  corner-smoothing: 60%;
+  background: #17171a;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 8px 22px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.home-app:hover img,
+.home-app:focus-visible img {
+  transform: scale(1.06);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    0 14px 34px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+}
+
+.home-app:active img { transform: scale(0.94); }
+
+.home-app span {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-app img { transition: none; }
+  .home-app:hover img,
+  .home-app:focus-visible img,
+  .home-app:active img { transform: none; }
+}
+
+/* ---------- app + privacy pages ---------- */
+
+header { padding: 3.5rem 0 2.25rem; }
+
+.app-head {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.app-head img {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex: none;
+  border-radius: var(--icon-radius);
+  -webkit-corner-smoothing: 60%;
+  corner-smoothing: 60%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+}
+
+h1 {
+  font-size: clamp(1.9rem, 5.5vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.tagline { color: var(--muted); margin: 0; font-size: 1.02rem; }
 
 .back {
   display: inline-block;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.25rem;
   color: var(--muted);
   text-decoration: none;
   font-size: 0.95rem;
 }
 .back:hover { color: var(--accent); }
 
-/* ---------- app grid ---------- */
-
-.apps {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.app {
-  display: block;
-  padding: 1.35rem 1.4rem 1.5rem;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.15s ease, transform 0.15s ease;
-}
-.app:hover { border-color: var(--accent); transform: translateY(-2px); }
-
-.app h2 { margin: 0 0 0.35rem; font-size: 1.15rem; letter-spacing: -0.01em; }
-.app p { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
-
-/* ---------- badge ---------- */
-
 .badge {
   display: inline-block;
-  padding: 0.15rem 0.6rem;
+  padding: 0.18rem 0.65rem;
   border-radius: 999px;
   background: var(--badge-bg);
+  border: 1px solid var(--border);
   color: var(--badge-ink);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-/* ---------- content ---------- */
-
-main h2 { margin: 2.5rem 0 0.75rem; font-size: 1.25rem; letter-spacing: -0.01em; }
-main h3 { margin: 1.75rem 0 0.5rem; font-size: 1.02rem; }
+main h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
 main p { margin: 0 0 1rem; }
-main ul { margin: 0 0 1rem; padding-left: 1.25rem; }
-main li { margin-bottom: 0.4rem; }
+main ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+main li { margin-bottom: 0.45rem; }
+
+main code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+  overflow-wrap: anywhere;
+}
 
 a { color: var(--accent); }
 
-.lede { font-size: 1.1rem; color: var(--muted); }
+.lede { font-size: 1.1rem; color: #d6d6da; }
 
 .meta {
-  margin: 1.5rem 0 0;
+  margin: 2rem 0 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
@@ -122,10 +202,11 @@ a { color: var(--accent); }
 }
 
 footer {
-  margin-top: 4rem;
+  margin-top: 3.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.9rem;
 }
 footer a { color: var(--muted); }
+footer a:hover { color: var(--accent); }
