@@ -11,7 +11,9 @@
   --badge-ink: #9b9ba3;
   --radius: 16px;
 
-  /* Apple's continuous-corner app icon: 22.37% of the icon's side */
+  /* Apple's app icon corner: 22.37% of the side. A plain border-radius, so it
+     is a rounded square rather than iOS's continuous-curvature squircle — no
+     browser implements the latter. */
   --icon-radius: 22.37%;
 
   color-scheme: dark;
@@ -74,9 +76,6 @@ body.home {
   width: 100%;
   aspect-ratio: 1;
   border-radius: var(--icon-radius);
-  /* Safari draws the real squircle; everyone else gets the rounded square. */
-  -webkit-corner-smoothing: 60%;
-  corner-smoothing: 60%;
   background: #17171a;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.6),
@@ -132,8 +131,6 @@ header { padding: 3.5rem 0 2.25rem; }
   height: 4.5rem;
   flex: none;
   border-radius: var(--icon-radius);
-  -webkit-corner-smoothing: 60%;
-  corner-smoothing: 60%;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
 }
 
