@@ -29,8 +29,9 @@ copy — rendered the way iOS draws a Home Screen.
 | GeoDrone | `/geodrone/` | `/geodrone/privacy/` | `~/repos/dipul-ios` |
 | Bodyweight+ | `/bodyweight-plus/` | `/bodyweight-plus/privacy/` | `~/repos/muskelmuskel` |
 | JasperSleep | `/jaspersleep/` | `/jaspersleep/privacy/` | `~/repos/babyphone` |
+| Releases | `/releases/` | `/releases/privacy/` | `~/repos/releases-app` |
 
-All six are marked **in development**. Drop the `<span class="badge">` line from
+All seven are marked **in development**. Drop the `<span class="badge">` line from
 an app's page when it ships.
 
 ## Adding an app
